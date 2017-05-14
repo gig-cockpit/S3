@@ -1,0 +1,30 @@
+#%RAML 1.0
+title: "S3"
+description: "S3 provision API"
+version: 0.0.1
+mediaType: application/json
+
+securitySchemes:
+  itsyouonline: !include https://raw.githubusercontent.com/gig-cockpit/raml-definitions/master/securityScheme/iyo.raml
+
+resourceTypes:
+  collection: !include https://raw.githubusercontent.com/gig-cockpit/raml-definitions/master/resourceTypes/collection.raml
+  member: !include https://raw.githubusercontent.com/gig-cockpit/raml-definitions/master/resourceTypes/member.raml
+
+securedBy: [itsyouonline]
+
+types:
+  S3:
+    properties:
+      id:
+        type: string
+        pattern: ^\w+$
+        required: true
+
+/s3:
+  type: collection
+  description: Manage S3 servers
+  post:
+    description: Create a new S3 compatible server
+  /{s3id}:
+    type: member
